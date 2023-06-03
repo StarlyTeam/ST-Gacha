@@ -1,19 +1,25 @@
-package net.starly.boilerplate;
+package net.starly.gacha;
 
 import net.starly.core.bstats.Metrics;
+import net.starly.gacha.command.GachaExecutor;
+import net.starly.gacha.context.MessageContent;
+import net.starly.gacha.repo.GachaRepository;
+import org.bukkit.Bukkit;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class BoilerPlateMain extends JavaPlugin {
+public class GachaMain extends JavaPlugin {
 
-    private static BoilerPlateMain instance;
-    public static BoilerPlateMain getInstance() {
+    private static GachaMain instance;
+    public static GachaMain getInstance() {
         return instance;
     }
 
 
     @Override
     public void onEnable() {
+
         /* DEPENDENCY
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         if (!isPluginEnabled("ST-Core")) {
@@ -26,15 +32,20 @@ public class BoilerPlateMain extends JavaPlugin {
         /* SETUP
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         instance = this;
-        new Metrics(this, 12345); // TODO: 수정
+        //new Metrics(this, 12345); // TODO: 수정
 
         /* CONFIG
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
-        // TODO: 수정
+        saveDefaultConfig();
+        MessageContent.getInstance().initialize(getConfig());
+
+        /* DATA
+         ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+        GachaRepository.getInstance().loadData();
 
         /* COMMAND
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
-        // TODO: 수정
+        getCommand("가챠").setExecutor(new GachaExecutor());
 
         /* LISTENER
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */

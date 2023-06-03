@@ -1,9 +1,9 @@
-name: ST-BoilerPlate # TODO: 수정
-main: net.starly.boilerplate.BoilerPlateMain # TODO: 수정
+name: ST-Gacha # TODO: 수정
+main: net.starly.gacha.GachaMain # TODO: 수정
 author: Starly Team
 website: http://starly.kr/
 
-description: BoilerPlate Plugin. # TODO: 수정
+description: Gacha Plugin. # TODO: 수정
 
 softdepend:
   - ST-Core
@@ -11,4 +11,11 @@ softdepend:
 version: 1.0
 api-version: 1.13
 
+permissions:
+  starly.gacha.admin:
+    description: 가챠 관리자 명령어 권한
+    default: op
+
 commands:
+  가챠:
+    description: A Gacha Command.
