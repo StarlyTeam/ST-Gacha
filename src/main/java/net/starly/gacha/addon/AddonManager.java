@@ -31,6 +31,8 @@ public class AddonManager {
         return null;
     }
 
+    private AddonManager() {}
+
     public boolean addPreset(String preset, PresetExecutor executor) {
         if (presetMap.containsKey(preset)) return false;
         else {

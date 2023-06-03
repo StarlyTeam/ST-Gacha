@@ -25,7 +25,7 @@ public class GachaRepository {
     private final File dataFile;
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public GachaRepository() {
+    private GachaRepository() {
         dataFile = new File(GachaMain.getInstance().getDataFolder(),"data.json");
         if (!dataFile.exists()) {
             try {

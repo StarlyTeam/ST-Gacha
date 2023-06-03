@@ -1,19 +1,14 @@
 package net.starly.gacha.manager.impl.input;
 
-import net.minecraft.server.v1_12_R1.ContainerAnvil;
-import net.starly.core.jb.version.nms.tank.NmsOtherUtil;
 import net.starly.gacha.GachaMain;
 import net.starly.gacha.gacha.Gacha;
 import net.starly.gacha.gacha.GachaItem;
 import net.starly.gacha.manager.InventoryListenerBase;
 import net.starly.gacha.manager.impl.setting.RewardSettingInventory;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftInventoryAnvil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -45,20 +40,20 @@ public class ItemPercentage extends InventoryListenerBase {
             return;
         }
         if (event.getSlot() == 0) return;
+
         event.setCancelled(false);
-        Inventory inventory = event.getClickedInventory();
-        System.out.println(event.getClickedInventory().getClass().getName());
+        AnvilInventory inventory = (AnvilInventory) event.getClickedInventory();
+
         if (inventory.getItem(2) == null) return;
         double percentage;
         try {
-            percentage = Double.parseDouble(inventory.getItem(2).getItemMeta().getDisplayName());
+            percentage = Double.parseDouble(inventory.getRenameText());
         } catch (NumberFormatException exception) {
             return;
         }
 
         GachaItem item = (GachaItem) inventory.getItem(0);
         item.setPercentage(percentage);
-        System.out.println(item.getPercentage());
         event.setCancelled(true);
         event.getWhoClicked().closeInventory();
         gachaMap.get(event.getWhoClicked().getUniqueId()).getItemList().add(item);

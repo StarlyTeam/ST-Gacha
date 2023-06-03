@@ -18,6 +18,8 @@ public class GachaManager {
         return instance;
     }
 
+    private GachaManager() {}
+
     @Getter
     private final List<Gacha> gachas = new ArrayList<>();
 
