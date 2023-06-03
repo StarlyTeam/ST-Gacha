@@ -1,11 +1,8 @@
 package net.starly.gacha;
 
-import net.starly.core.bstats.Metrics;
 import net.starly.gacha.command.GachaExecutor;
 import net.starly.gacha.context.MessageContent;
 import net.starly.gacha.repo.GachaRepository;
-import org.bukkit.Bukkit;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 

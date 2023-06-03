@@ -1,12 +1,9 @@
 package net.starly.gacha.manager.impl.input;
 
-import lombok.Getter;
-import net.starly.gacha.addon.AddonManager;
 import net.starly.gacha.context.MessageContent;
 import net.starly.gacha.context.MessageType;
 import net.starly.gacha.manager.ChatListenerBase;
 import net.starly.gacha.manager.GachaManager;
-import net.starly.gacha.manager.impl.setting.GachaSettingInventory;
 import net.starly.gacha.manager.impl.setting.RewardSettingInventory;
 import net.starly.gacha.preset.PresetExecutor;
 import org.bukkit.entity.Player;

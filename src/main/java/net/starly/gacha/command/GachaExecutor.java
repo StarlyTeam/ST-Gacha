@@ -1,18 +1,12 @@
 package net.starly.gacha.command;
 
-import net.starly.gacha.GachaMain;
-import net.starly.gacha.builder.ItemBuilder;
 import net.starly.gacha.context.MessageContent;
 import net.starly.gacha.context.MessageType;
 import net.starly.gacha.manager.impl.setting.GachaSettingInventory;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 

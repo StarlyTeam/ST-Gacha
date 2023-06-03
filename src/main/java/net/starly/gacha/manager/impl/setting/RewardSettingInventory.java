@@ -1,8 +1,5 @@
 package net.starly.gacha.manager.impl.setting;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
-import net.starly.core.jb.util.Pair;
 import net.starly.core.jb.util.PlayerSkullManager;
 import net.starly.gacha.GachaMain;
 import net.starly.gacha.builder.ItemBuilder;
@@ -16,10 +13,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
