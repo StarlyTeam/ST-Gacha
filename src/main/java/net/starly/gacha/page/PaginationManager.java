@@ -31,7 +31,7 @@ public class PaginationManager {
         List<RewardPage> pages = new ArrayList<>();
 
         if (items.isEmpty()) {
-            pages.add(new RewardPage(1,Collections.emptyList()));
+            pages.add(new RewardPage(1,new ArrayList<>()));
             return pages;
         }
 

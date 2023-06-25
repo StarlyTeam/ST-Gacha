@@ -1,4 +1,4 @@
-package net.starly.gacha.manager;
+package net.starly.gacha.gui;
 
 import net.starly.gacha.GachaMain;
 import org.bukkit.Server;
@@ -35,6 +35,7 @@ public abstract class InventoryListenerBase {
         Server server = GachaMain.getInstance().getServer();
         Listener closeEventListener = new Listener() {};
 
+
         server.getPluginManager().registerEvent(InventoryCloseEvent.class, closeEventListener, EventPriority.LOWEST, (listeners, event) -> {
             if (event instanceof InventoryCloseEvent) {
                 InventoryCloseEvent closeEvent = (InventoryCloseEvent) event;
@@ -44,7 +45,7 @@ public abstract class InventoryListenerBase {
                         InventoryClickEvent.getHandlerList().unregister(listener);
                     }
                     HandlerList.unregisterAll(closeEventListener);
-
+                    System.out.println("dsds");
                     listenerManager.onClose(closeEvent);
                 }
             }

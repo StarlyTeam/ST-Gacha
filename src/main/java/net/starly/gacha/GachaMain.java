@@ -1,8 +1,13 @@
 package net.starly.gacha;
 
+import net.starly.gacha.addon.registry.AddonRegistry;
 import net.starly.gacha.command.GachaExecutor;
 import net.starly.gacha.context.MessageContent;
+import net.starly.gacha.preset.service.SimpleGachaService;
 import net.starly.gacha.repo.GachaRepository;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,6 +36,8 @@ public class GachaMain extends JavaPlugin {
         instance = this;
         //new Metrics(this, 12345); // TODO: 수정
 
+        AddonRegistry.registerPreset("StarlyGacha", new SimpleGachaService());
+
         /* CONFIG
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         saveDefaultConfig();
@@ -44,9 +51,11 @@ public class GachaMain extends JavaPlugin {
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         getCommand("가챠").setExecutor(new GachaExecutor());
 
-        /* LISTENER
-         ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
-        // TODO: 수정
+    }
+
+    @Override
+    public void onDisable() {
+        GachaRepository.getInstance().saveData();
     }
 
     private boolean isPluginEnabled(String name) {

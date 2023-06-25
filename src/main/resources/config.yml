@@ -1,16 +1,14 @@
 messages:
 
   # 접두시
-  prefix: " &6가챠 |"
+  prefix: " &6가챠 | "
 
-  # 가챠 이름 입력 메시지
-  inputGachaName: "&a가챠 이름을 입력하여주세요. ( 취소를 입력하여 입력을 취소합니다. )"
-  # 가챠 프리셋 입력 메시지
-  inputGachaPreset: "&a가챠 프리셋 이름을 입력하여주세요 ( 취소를 입력하여 입력을 취소합니다. )"
-  # 입력 취소 시 메시지
-  inputCancel: "&a입력이 취소되었습니다."
   # 가차 생성 시 메시지
   gachaCreated: "&a가챠가 생성되었습니다."
+  # 가챠 삭제 시 메시지
+  gachaDeleted: "&a가챠가 삭제되었습니다."
+  # 플러그인 리로드 메시지
+  reloadCompleted: "&a리로드가 완료되었습니다."
 
 errorMessages:
 
@@ -20,5 +18,9 @@ errorMessages:
   noConsole: "&c해당 명령어는 콘솔에서 실행할 수 없습니다!"
   # 이미 존재하는 가챠를 생성할 때
   existGacha: "&c이미 사용중인 이름입니다!"
+  # 존재하지 않는 가챠를 사용하려 할 때
+  noExistGacha: "&c존재하지 않는 이름입니다!"
   # 존재하지 않는 프리셋을 설정했을 때
   noExistPreset: "&c존재하지 않는 프리셋입니다!"
+  # 존재하지 않는 명령어 사용 시
+  wrongCommand: "&c잘못된 명령어입니다! 명령어를 확인해주세요."

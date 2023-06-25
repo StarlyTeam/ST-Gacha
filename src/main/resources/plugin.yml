@@ -1,9 +1,9 @@
-name: ST-Gacha # TODO: 수정
-main: net.starly.gacha.GachaMain # TODO: 수정
+name: ST-Gacha
+main: net.starly.gacha.GachaMain
 author: Starly Team
 website: http://starly.kr/
 
-description: Gacha Plugin. # TODO: 수정
+description: Gacha Plugin.
 
 softdepend:
   - ST-Core
@@ -12,9 +12,27 @@ version: 1.0
 api-version: 1.13
 
 permissions:
-  starly.gacha.admin:
-    description: 가챠 관리자 명령어 권한
+  starly.gacha.create:
+    description: 가챠생성
     default: op
+  starly.gacha.delete:
+    description: 가챠삭제
+    default: op
+  starly.gacha.reward:
+    description: 보상설정
+    default: op
+  starly.gacha.reload:
+    description: 리로드
+    default: op
+  starly.gacha.roll:
+    description: 뽑기
+    default: op
+  starly.gacha.*:
+    children:
+      - starly.gacha.create
+      - starly.gacha.delete
+      - starly.gacha.reward
+      - starly.gacha.roll
 
 commands:
   가챠:

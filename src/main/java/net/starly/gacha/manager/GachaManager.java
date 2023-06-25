@@ -57,6 +57,6 @@ public class GachaManager {
     }
 
     public void roll(Player player, Gacha gacha) {
-        gacha.getPresetExecutor().execute(player, new GachaGame(player, gacha));
+        gacha.getPresetExecutor().execute(new GachaGame(player, gacha));
     }
 }

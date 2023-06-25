@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 group 'net.starly.gacha'
@@ -10,6 +11,10 @@ repositories {
     maven {
         url = "http://starly.kr:8083/repository/maven-public/"
         allowInsecureProtocol = true
+    }
+
+    maven {
+        url = "https://repo.codemc.io/repository/maven-snapshots/";
     }
 }
 
@@ -24,6 +29,7 @@ dependencies {
 
     // OTHER DEPENDENCIES
     compileOnly "net.starly.core:ST-Core:1.8.1"
+    implementation "net.wesjd:anvilgui:1.6.5-SNAPSHOT"
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -31,5 +37,9 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 jar {
+    finalizedBy shadowJar
+}
+
+shadowJar {
     destinationDirectory.set(file('C:\\Users\\mypc\\Pictures\\마크 서버\\Starly\\plugins'))
 }
