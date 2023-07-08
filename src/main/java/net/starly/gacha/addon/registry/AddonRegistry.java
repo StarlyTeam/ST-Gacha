@@ -32,7 +32,6 @@ public class AddonRegistry {
      * @param name 제거 할 프리셋의 이름
      * @return 제거 성공 여부
      */
-
     public static boolean unregisterPreset(String name) {
         if (!manager.hasPreset(name)) return false;
         return manager.removePreset(name);

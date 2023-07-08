@@ -1,5 +1,6 @@
 package net.starly.gacha;
 
+import net.starly.core.bstats.Metrics;
 import net.starly.gacha.addon.registry.AddonRegistry;
 import net.starly.gacha.command.GachaExecutor;
 import net.starly.gacha.context.MessageContent;
@@ -34,9 +35,9 @@ public class GachaMain extends JavaPlugin {
         /* SETUP
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         instance = this;
-        //new Metrics(this, 12345); // TODO: 수정
+        new Metrics(this, 18947);
 
-        AddonRegistry.registerPreset("StarlyGacha", new SimpleGachaService());
+        AddonRegistry.registerPreset("기본", new SimpleGachaService());
 
         /* CONFIG
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */

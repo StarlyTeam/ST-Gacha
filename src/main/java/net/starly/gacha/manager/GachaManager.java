@@ -1,6 +1,7 @@
 package net.starly.gacha.manager;
 
 import lombok.Getter;
+import net.starly.gacha.addon.AddonManager;
 import net.starly.gacha.gacha.GachaItem;
 import net.starly.gacha.gacha.Gacha;
 import net.starly.gacha.gacha.GachaGame;
@@ -25,7 +26,7 @@ public class GachaManager {
 
     public void addGacha(String name, PresetExecutor executor, List<GachaItem> rewards) {
         if (hasGacha(name)) return;
-        gachas.add(new Gacha(name, executor, rewards));
+        gachas.add(new Gacha(name, AddonManager.getInstance().getPreset(executor), rewards));
     }
 
     public void addGacha(Gacha gacha) {
@@ -57,6 +58,12 @@ public class GachaManager {
     }
 
     public void roll(Player player, Gacha gacha) {
-        gacha.getPresetExecutor().execute(new GachaGame(player, gacha));
+        PresetExecutor executor = AddonManager.getInstance().getExecutor(gacha.getPresetName());
+
+        if (executor == null) {
+            executor = AddonManager.getInstance().getExecutor("기본");
+        }
+
+        executor.execute(new GachaGame(player, gacha));
     }
 }

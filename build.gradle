@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'net.starly.gacha'
-version '1.0'
+version '1.1'
 
 repositories {
     mavenCentral()
@@ -29,7 +29,7 @@ dependencies {
 
     // OTHER DEPENDENCIES
     compileOnly "net.starly.core:ST-Core:1.8.1"
-    implementation "net.wesjd:anvilgui:1.6.5-SNAPSHOT"
+    implementation "net.wesjd:anvilgui:1.7.0-SNAPSHOT"
 }
 
 tasks.withType(JavaCompile).configureEach {

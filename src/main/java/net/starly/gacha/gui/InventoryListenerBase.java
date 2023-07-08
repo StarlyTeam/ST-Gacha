@@ -45,7 +45,6 @@ public abstract class InventoryListenerBase {
                         InventoryClickEvent.getHandlerList().unregister(listener);
                     }
                     HandlerList.unregisterAll(closeEventListener);
-                    System.out.println("dsds");
                     listenerManager.onClose(closeEvent);
                 }
             }

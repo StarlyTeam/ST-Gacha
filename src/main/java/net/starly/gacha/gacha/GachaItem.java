@@ -112,8 +112,6 @@ public class GachaItem extends ItemStack {
     public static GachaItem fromMap(Map<String, Object> map) {
         try {
 
-            System.out.println((String) map.get("stack"));
-
             ItemStack stack = EncodeUtil.decode((String) map.get("stack"), ItemStack.class);
 
             return new GachaItem(stack, (Double) map.get("percentage"));

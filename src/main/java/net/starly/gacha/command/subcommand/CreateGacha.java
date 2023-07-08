@@ -37,7 +37,7 @@ public class CreateGacha extends GachaSub {
             return;
         }
 
-        Gacha gacha = new Gacha(name, AddonManager.getInstance().getExecutor(preset), new ArrayList<>());
+        Gacha gacha = new Gacha(name, preset, new ArrayList<>());
         GachaManager.getInstance().addGacha(gacha);
         content.getMessageAfterPrefix(MessageType.NORMAL, "gachaCreated").ifPresent(sender::sendMessage);
 

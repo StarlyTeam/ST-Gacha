@@ -24,3 +24,5 @@ errorMessages:
   noExistPreset: "&c존재하지 않는 프리셋입니다!"
   # 존재하지 않는 명령어 사용 시
   wrongCommand: "&c잘못된 명령어입니다! 명령어를 확인해주세요."
+  # 존재하지 않는 플레이어에게 가챠를 열려고 시도 할 시
+  noPlayer: "&c존재하지 않는 플레이어입니다."

@@ -23,7 +23,11 @@ public class GachaExecutor implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(GachaMain.getInstance().getName() + "이 현재 " + GachaMain.getInstance().getServer().getBukkitVersion() + "에서 구동중입니다.");
+            sender.sendMessage("§6§l/가챠 생성 [이름] [프리셋]");
+            sender.sendMessage("§6§l/가챠 삭제 [이름]");
+            sender.sendMessage("§6§l/가챠 리로드");
+            sender.sendMessage("§6§l/가챠 보상설정 [이름]");
+            sender.sendMessage("§6§l/가챠 뽑기 [이름]");
             return true;
         }
 
@@ -36,7 +40,7 @@ public class GachaExecutor implements TabExecutor {
         else if (args[0].equalsIgnoreCase("보상설정"))
             new ModifyGacha("starly.gacha.reward", false, 2, 2).run(sender, args);
         else if (args[0].equalsIgnoreCase("뽑기"))
-            new RollGacha("starly.gacha.roll", false, 2, 2).run(sender, args);
+            new RollGacha("starly.gacha.roll", false, 2, 3).run(sender, args);
 
         return false;
     }
@@ -53,6 +57,8 @@ public class GachaExecutor implements TabExecutor {
             return AddonManager.getInstance().getPresetMap().keySet().stream()
                     .filter(name -> name.toLowerCase().startsWith(args[2].toLowerCase()))
                     .collect(Collectors.toList());
+        } else if (args.length == 3 && args[0].equalsIgnoreCase("뽑기")) {
+            return null;
         }
         return Collections.emptyList();
     }

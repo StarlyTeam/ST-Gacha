@@ -2,8 +2,10 @@ package net.starly.gacha.preset.service;
 
 import net.starly.gacha.GachaMain;
 import net.starly.gacha.addon.registry.AddonRegistry;
+import net.starly.gacha.builder.ItemBuilder;
 import net.starly.gacha.gacha.GachaGame;
 import net.starly.gacha.preset.PresetExecutor;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventPriority;
@@ -36,43 +38,48 @@ public class SimpleGachaService implements PresetExecutor {
 
         Inventory gameInventory = plugin.getServer().createInventory(null, InventoryType.HOPPER, gacha.getGacha().getName());
 
-        AtomicBoolean deceleration = new AtomicBoolean(false);
-
-        AtomicInteger rollCount = new AtomicInteger(0);
-        AtomicInteger delay = new AtomicInteger(2);
-
-        AtomicInteger tick = new AtomicInteger(0);
-
         new BukkitRunnable() {
+            int rollCount = 0;
+            int delay = 2;
+            int tick = 0;
+            boolean deceleration = false;
+
             @Override
             public void run() {
 
                 if (!gacha.getPlayer().isOnline()) {
                     HandlerList.unregisterAll(inventoryClickListener);
+
+                    ItemStack item = AddonRegistry.chooseItem(gacha.getGacha().getItemList());
+                    if (item == null) item = new ItemStack(Material.AIR);
+
+                    gacha.getPlayer().getInventory().addItem(item);
                     cancel();
                 }
 
                 gacha.getPlayer().openInventory(gameInventory);
-                tick.getAndIncrement();
+                tick++;
 
-                if (tick.get() >= delay.get()) {
+                if (tick >= delay) {
                     gacha.getPlayer().playSound(gacha.getPlayer().getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,100,2);
 
                     ItemStack item = AddonRegistry.chooseItem(gacha.getGacha().getItemList());
+                    if (item == null) item = new ItemStack(Material.AIR);
+
                     for (int i = 0; i < 5; i++) gameInventory.setItem(i, item);
 
-                    if (deceleration.get()) delay.getAndAdd(2);
-                    else if (rollCount.get() >= 7) deceleration.set(true);
+                    if (deceleration) delay += 1;
+                    else if (rollCount >= 8) deceleration = true;
 
-                    tick.set(0);
-                    rollCount.getAndIncrement();
-                } else if (delay.get() > 25) {
+                    tick = 0;
+                    rollCount++;
+                } else if (delay > 16) {
                     new BukkitRunnable() {
                         @Override
                         public void run() {
                             showResultInventory(gacha.getPlayer(), gameInventory.getItem(0), inventoryClickListener);
                         }
-                    }.runTaskLater(plugin, delay.get());
+                    }.runTaskLater(plugin, delay);
                     cancel();
                 }
             }
@@ -82,6 +89,7 @@ public class SimpleGachaService implements PresetExecutor {
     private void showResultInventory(Player player, ItemStack result, Listener inventoryClickListener) {
 
         Inventory resultInventory = plugin.getServer().createInventory(null, InventoryType.DISPENSER, "보상 수령");
+
         resultInventory.setItem(4, result);
 
         HandlerList.unregisterAll(inventoryClickListener);

@@ -19,13 +19,13 @@ import java.util.Map;
 public class Gacha {
 
     private String name;
-    private PresetExecutor presetExecutor;
+    private String presetName;
     private List<GachaItem> itemList;
 
     public HashMap<String, Object> serialize() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("name", name);
-        result.put("preset", AddonManager.getInstance().getPreset(presetExecutor));
+        result.put("preset", presetName);
 
         List<String> items = new ArrayList<>();
         itemList.forEach(gachaItem -> items.add(EncodeUtil.encode(gachaItem)));
@@ -38,11 +38,7 @@ public class Gacha {
     public static Gacha deserialize(Map<String, Object> map) {
         try {
             String name = (String) map.get("name");
-            PresetExecutor executor = AddonManager.getInstance().getExecutor((String) map.get("preset"));
-            if (executor == null) {
-                GachaMain.getInstance().getLogger().severe("[ ST-Gacha ] " + name + "의 프리셋이 적용되지 않았습니다.");
-                return null;
-            }
+            String executor = (String) map.get("preset");
 
             List<GachaItem> itemList = new ArrayList<>();
             if (map.containsKey("itemList")) {

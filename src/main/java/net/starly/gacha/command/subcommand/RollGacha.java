@@ -1,8 +1,10 @@
 package net.starly.gacha.command.subcommand;
 
+import net.starly.gacha.GachaMain;
 import net.starly.gacha.command.GachaSub;
 import net.starly.gacha.context.MessageContent;
 import net.starly.gacha.context.MessageType;
+import net.starly.gacha.gacha.Gacha;
 import net.starly.gacha.manager.GachaManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -25,6 +27,16 @@ public class RollGacha extends GachaSub {
             return;
         }
 
+        if (args.length == 2) {
+            Player player = GachaMain.getInstance().getServer().getPlayer(args[1]);
+            if (player == null || !player.isOnline()) {
+                content.getMessageAfterPrefix(MessageType.ERROR,"noPlayer").ifPresent(sender::sendMessage);
+                return;
+            }
+
+            GachaManager.getInstance().roll(player, GachaManager.getInstance().getGacha(name));
+            return;
+        }
         GachaManager.getInstance().roll((Player) sender, GachaManager.getInstance().getGacha(name));
 
     }

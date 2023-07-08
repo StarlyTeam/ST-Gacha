@@ -77,15 +77,12 @@ public class RewardSettingInventory extends InventoryListenerBase {
                 int page = pageManager.getCurrentPage();
 
                 pageManager = new PaginationManager(gacha.getItemList());
-                System.out.println(page);
-                System.out.println(pageManager.getPages().size());
-                System.out.println(pageManager.getCurrentPage());
                 if (pageManager.getPages().size() < page) page = pageManager.getPages().size();
 
                 while (page != pageManager.getCurrentPage()) pageManager.nextPage();
 
                 pageMap.put(event.getWhoClicked().getUniqueId(), pageManager);
-                reloadPage(inventory, pageManager);
+                openInventory((Player) event.getWhoClicked());
                 break;
             }
         }
@@ -93,6 +90,7 @@ public class RewardSettingInventory extends InventoryListenerBase {
 
     public void openInventory(Player player, Gacha gacha) {
         gachaMap.put(player.getUniqueId(), gacha);
+        pageMap.put(player.getUniqueId(), new PaginationManager(gacha.getItemList()));
         openInventory(player);
     }
 
@@ -108,9 +106,15 @@ public class RewardSettingInventory extends InventoryListenerBase {
         Inventory inventory = plugin.getServer().
                 createInventory(null,54,gacha.getName() + " :: 보상설정 ( 합계 : " + color + percentage.get() + "§r% )");
 
-        PaginationManager pageManager = new PaginationManager(gacha.getItemList());
-        pageMap.put(player.getUniqueId(), pageManager);
 
+        PaginationManager pageManager;
+
+        if (pageMap.containsKey(player.getUniqueId())) {
+            pageManager = pageMap.get(player.getUniqueId());
+        } else {
+            pageManager = new PaginationManager(gacha.getItemList());
+            pageMap.put(player.getUniqueId(), pageManager);
+        }
 
         AtomicInteger slot = new AtomicInteger();
         pageManager.getCurrentPageData().getItems().forEach(gachaItem -> {
@@ -133,10 +137,12 @@ public class RewardSettingInventory extends InventoryListenerBase {
         }
 
         inventory.setItem(45, new ItemBuilder(Material.BARRIER)
-                .setName("§c이전화면")
+                .setName("§c닫기")
                 .build());
-        inventory.setItem(48, PlayerSkullManager.getCustomSkull("da53d04797b47a68484d111025d940a34886a0fa8dc806e7457024a87f1abd56"));
-        inventory.setItem(50, new ItemBuilder(PlayerSkullManager.getCustomSkull("65a84e6394baf8bd795fe747efc582cde9414fccf2f1c8608f1be18c0e079138"))
+        inventory.setItem(48, new ItemBuilder(Material.ARROW)
+                .setName("§b이전 페이지")
+                .build());
+        inventory.setItem(50, new ItemBuilder(Material.ARROW)
                 .setName("§b다음 페이지")
                 .build());
         inventory.setItem(53, new ItemBuilder(Material.ANVIL)
@@ -173,8 +179,10 @@ public class RewardSettingInventory extends InventoryListenerBase {
         inventory.setItem(45, new ItemBuilder(Material.BARRIER)
                 .setName("§c이전화면")
                 .build());
-        inventory.setItem(48, PlayerSkullManager.getCustomSkull("da53d04797b47a68484d111025d940a34886a0fa8dc806e7457024a87f1abd56"));
-        inventory.setItem(50, new ItemBuilder(PlayerSkullManager.getCustomSkull("65a84e6394baf8bd795fe747efc582cde9414fccf2f1c8608f1be18c0e079138"))
+        inventory.setItem(48, new ItemBuilder(Material.ARROW)
+                .setName("§b이전 페이지")
+                .build());
+        inventory.setItem(50, new ItemBuilder(Material.ARROW)
                 .setName("§b다음 페이지")
                 .build());
         inventory.setItem(53, new ItemBuilder(Material.ANVIL)
