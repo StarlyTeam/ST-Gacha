@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'net.starly.gacha'
-version '1.1'
+version '1.0.1'
 
 repositories {
     mavenCentral()
@@ -41,5 +41,5 @@ jar {
 }
 
 shadowJar {
-    destinationDirectory.set(file('C:\\Users\\mypc\\Pictures\\마크 서버\\Starly\\plugins'))
+    destinationDirectory.set(file('C:\\Users\\PC\\대영\\스탈리 스토어\\개발용 버킷\\1.20.1\\plugins'))
 }
