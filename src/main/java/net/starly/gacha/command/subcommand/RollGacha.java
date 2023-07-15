@@ -27,7 +27,7 @@ public class RollGacha extends GachaSub {
             return;
         }
 
-        if (args.length == 2) {
+        if (args.length == 3) {
             Player player = GachaMain.getInstance().getServer().getPlayer(args[1]);
             if (player == null || !player.isOnline()) {
                 content.getMessageAfterPrefix(MessageType.ERROR,"noPlayer").ifPresent(sender::sendMessage);

@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.io.BukkitObjectInputStream;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -26,9 +27,9 @@ public class GachaItem extends ItemStack {
 
     @Getter
     @Setter
-    private double percentage = 0d;
+    private BigDecimal percentage = BigDecimal.valueOf(0);
 
-    public GachaItem(ItemStack stack, double d) throws IllegalArgumentException {
+    public GachaItem(ItemStack stack, BigDecimal d) throws IllegalArgumentException {
         Validate.notNull(stack, "Cannot copy null stack");
         setType(stack.getType());
         setAmount(stack.getAmount());
@@ -56,7 +57,7 @@ public class GachaItem extends ItemStack {
             result.put("meta", meta);
         }
 
-        result.put("percentage", percentage);
+        result.put("percentage", percentage.doubleValue());
 
         return result;
     }
@@ -96,7 +97,7 @@ public class GachaItem extends ItemStack {
             }
         }
 
-        return new GachaItem(result, (Double) args.get("percentage"));
+        return new GachaItem(result, BigDecimal.valueOf((Double) args.get("percentage")));
     }
 
     public Map<String, Object> toMap() {
@@ -114,7 +115,7 @@ public class GachaItem extends ItemStack {
 
             ItemStack stack = EncodeUtil.decode((String) map.get("stack"), ItemStack.class);
 
-            return new GachaItem(stack, (Double) map.get("percentage"));
+            return new GachaItem(stack, (BigDecimal) map.get("percentage"));
 
         } catch (Exception exception) {
             return null;

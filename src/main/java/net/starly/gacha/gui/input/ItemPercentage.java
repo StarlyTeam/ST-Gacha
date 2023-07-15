@@ -8,6 +8,7 @@ import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class ItemPercentage{
@@ -33,7 +34,7 @@ public class ItemPercentage{
         } catch (NumberFormatException exception) {
             return Collections.emptyList();
         }
-        GachaItem item = new GachaItem(snapshot.getLeftItem(), percentage);
+        GachaItem item = new GachaItem(snapshot.getLeftItem(), BigDecimal.valueOf(percentage));
         Gacha gacha = gachaMap.get(snapshot.getPlayer().getUniqueId());
         gacha.getItemList().add(item);
         snapshot.getPlayer().closeInventory();

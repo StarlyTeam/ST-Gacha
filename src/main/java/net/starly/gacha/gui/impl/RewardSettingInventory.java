@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -99,12 +100,12 @@ public class RewardSettingInventory extends InventoryListenerBase {
         if (!gachaMap.containsKey(player.getUniqueId())) return;
         Gacha gacha = gachaMap.get(player.getUniqueId());
 
-        AtomicReference<Double> percentage = new AtomicReference<>(0d);
-        gacha.getItemList().forEach(gachaItem -> percentage.updateAndGet(v -> v + gachaItem.getPercentage()));
-        ChatColor color = percentage.get() == 100 ? ChatColor.GREEN : ChatColor.RED;
+        AtomicReference<BigDecimal> percentage = new AtomicReference<>(BigDecimal.ZERO);
+        gacha.getItemList().forEach(gachaItem -> percentage.updateAndGet(v -> v.add(gachaItem.getPercentage())));
+        ChatColor color = percentage.get().doubleValue() == 100 ? ChatColor.GREEN : ChatColor.RED;
 
         Inventory inventory = plugin.getServer().
-                createInventory(null,54,gacha.getName() + " :: 보상설정 ( 합계 : " + color + percentage.get() + "§r% )");
+                createInventory(null,54,gacha.getName() + " :: 보상설정 ( 합계 : " + color + percentage.get().doubleValue() + "§r% )");
 
 
         PaginationManager pageManager;

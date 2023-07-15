@@ -94,10 +94,10 @@ public class AddonRegistry {
 
         List<GachaItem> items = new ArrayList<>();
 
-        list.stream().filter(gachaItem -> gachaItem.getPercentage() > 0).forEach(items::add);
+        list.stream().filter(gachaItem -> gachaItem.getPercentage().doubleValue() > 0).forEach(items::add);
 
         items.stream().map(GachaItem::getPercentage).forEach(percentage -> {
-            cumulativeProbability.updateAndGet(v -> v + percentage / 100);
+            cumulativeProbability.updateAndGet(v -> v + percentage.doubleValue() / 100);
             cumulativeProbabilities.add(cumulativeProbability.get());
         });
 
