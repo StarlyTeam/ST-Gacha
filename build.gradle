@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'net.starly.gacha'
-version '1.0.1'
+version '1.1.1'
 
 repositories {
     mavenCentral()
@@ -38,8 +38,4 @@ tasks.withType(JavaCompile).configureEach {
 
 jar {
     finalizedBy shadowJar
-}
-
-shadowJar {
-    destinationDirectory.set(file('C:\\Users\\PC\\대영\\스탈리 스토어\\개발용 버킷\\1.20.1\\plugins'))
 }
